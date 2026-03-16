@@ -34,6 +34,19 @@ All credit for the core StereoCrafter technology goes to the original authors at
 
 Original Paper: [StereoCrafter: Diffusion-based Generation of Long and High-fidelity Stereoscopic 3D from Monocular Videos](https://arxiv.org/abs/2409.07447)
 
+### Citation
+
+If you use this project in your work, please cite the original StereoCrafter paper:
+
+```bibtex
+@article{zhao2024stereocrafter,
+  title={V: Diffusion-based generation of long and high-fidelity stereoscopic 3d from monocular videos},
+  author={Zhao, Sijie and Hu, Wenbo and Cun, Xiaodong and Zhang, Yong and Li, Xiaoyu and Kong, Zhe and Gao, Xiangjun and Niu, Muyao and Shan, Ying},
+  journal={arXiv preprint arXiv:2409.07447},
+  year={2024}
+}
+```
+
 ### Project Status
 
 ⚠️ **This is a passion project built in free time!**
