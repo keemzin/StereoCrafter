@@ -2,6 +2,9 @@
 
 services:
   stereocrafter-webui:
+    build:
+      context: .
+      dockerfile: Dockerfile.filebrowser
     image: johnsdoes/stereocrafter-webui:rebase-v1.0.0
     container_name: stereocrafter-webui
     

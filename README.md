@@ -84,10 +84,9 @@ This codebase is functional but not fully optimized. Built out of love for the t
 - NVIDIA GPU with drivers installed
 - [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html) (for GPU support)
 
-**Quick Start:**
+**Option A — Pull from Docker Hub (fastest):**
 
 ```bash
-# Clone the repository
 git clone https://github.com/keemzin/StereoCrafter.git
 cd StereoCrafter
 
@@ -96,15 +95,21 @@ HF_TOKEN=your_huggingface_token_here
 FB_USERNAME=admin
 FB_PASSWORD=adminadmin12
 
-# Start the container (downloads models on first run)
+# Pull & run
 docker compose up -d
+```
 
-# View logs
-docker compose logs -f
+**Option B — Build locally (if customizing code):**
 
-# Access:
-StereoCrafter WebUI → http://localhost:7860
-FileBrowser         → http://localhost:8080
+```bash
+git clone https://github.com/keemzin/StereoCrafter.git
+cd StereoCrafter
+
+# 1. Build base layer (one-time, includes all deps)
+docker build -f Dockerfile.base -t johnsdoes/stereocrafter-webui:rebase .
+
+# 2. Build filebrowser layer + run
+docker compose up -d
 ```
 
 **Docker Commands:**
@@ -115,6 +120,7 @@ docker compose restart       # Restart after code changes
 docker compose ps            # Status
 docker compose exec stereocrafter-webui bash  # Shell access
 docker compose down -v       # Remove everything including weights
+docker compose build         # Rebuild filebrowser image after code changes
 ```
 
 ---

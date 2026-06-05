@@ -1,0 +1,29 @@
+# StereoCrafter WEBUI + FileBrowser
+# Single layer on top of base image - replaces both Dockerfile and Dockerfile.filebrowser
+
+FROM johnsdoes/stereocrafter-webui:rebase
+
+WORKDIR /workspace/StereoCrafter
+
+# Copy code files
+COPY webui.py .
+COPY requirements-docker.txt .
+COPY gui/ ./gui/
+COPY stereocrafter_ui/ ./stereocrafter_ui/
+COPY depthcrafter/ ./depthcrafter/
+COPY runpod-docker-startup.sh .
+
+# Install FileBrowser
+RUN curl -fsSL https://raw.githubusercontent.com/filebrowser/get/master/get.sh | bash
+
+# Copy startup script and fix line endings (Windows CRLF -> Linux LF)
+COPY start-with-filebrowser.sh /workspace/start-with-filebrowser.sh
+RUN sed -i 's/\r//' /workspace/start-with-filebrowser.sh \
+        /workspace/StereoCrafter/runpod-docker-startup.sh && \
+    chmod +x /workspace/start-with-filebrowser.sh \
+             /workspace/StereoCrafter/runpod-docker-startup.sh
+
+# Expose ports
+EXPOSE 7860 8080
+
+CMD ["/workspace/start-with-filebrowser.sh"]
